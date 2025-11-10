@@ -1,0 +1,8 @@
+{
+  "name": "espaco-em-branco-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/William-Daniel-Dias/espaco-em-branco-api.git",
+  "author": "William Daniel Dias <daniel.willia@hotmail.com>",
+  "license": "MIT"
+}

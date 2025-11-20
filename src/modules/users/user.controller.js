@@ -1,26 +1,32 @@
 import { makeUserService } from './user.service.js';
-import { ensureAuth } from '../../middlewares/auth.js';
 
 export const makeUserController = () => {
-    const service = makeUserService();
+    const userService = makeUserService();
+
+
     const register = async (req, res, next) => {
         try {
-            const { name, email, password } = req.body;
-            const user = await service.register({ name, email, password });
-            return res.status(201).json({
-                id: user.id, name: user.name, email: user.email
-            });
-        } catch (err) { return next(err); }
+            const newUser = await userService.registerUser(req.body);
+            return res.status(201).json(newUser);
+        } catch (error) { 
+            next(error);
+        }
     };
+
     const login = async (req, res, next) => {
         try {
             const { email, password } = req.body;
-            const tokens = await service.login({ email, password });
-            return res.json(tokens);
-        } catch (err) { return next(err); }
+            const response = await userService.authenticateUser({ email, password });
+
+            return res.status(200).json(response);
+        } catch (error) { 
+            next(error); 
+        }
     };
-    const me = [ensureAuth, async (req, res) => res.json({
-        userId: req.user.id
-    })];
-    return { register, login, me };
+
+
+    return { 
+        register, 
+        login
+    };
 };

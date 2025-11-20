@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../config/database.js';
+import { database } from '../config/database.js';
 
-const User = sequelize.define('User', {
+export const User = database.define('User', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -13,7 +13,7 @@ const User = sequelize.define('User', {
         validate: {
             len: {
                 args: [3, 100],
-                msg: 'Nome deve ter entre 3 e 100 caracteres'
+                msg: 'Name must be between 3 and 100 characters long.'
             }
         }
     },
@@ -21,11 +21,11 @@ const User = sequelize.define('User', {
         type: DataTypes.STRING(255),
         allowNull: false,
         unique: {
-            msg: 'Email já cadastrado'
+            msg: 'Email already registered.'
         },
         validate: {
             isEmail: {
-                msg: 'Email inválido'
+                msg: 'Invalid email format.'
             }
         }
     },
@@ -34,14 +34,19 @@ const User = sequelize.define('User', {
         allowNull: false,
         field: 'password_hash'
     },
-    isAdmin: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
-        field: 'is_admin'
+    userType: {
+        type: DataTypes.ENUM('artist', 'supporter', 'public'),
+        allowNull: false,
+        field: 'user_type',
+        validate: {
+            isIn: {
+                args: [['artist', 'supporter', 'public']],
+                msg: 'Invalid user type. Must be artist, supporter, or public.'
+            }
+        }
     }
 }, {
     tableName: 'users',
     timestamps: true,
     underscored: true
 });
-export default User;

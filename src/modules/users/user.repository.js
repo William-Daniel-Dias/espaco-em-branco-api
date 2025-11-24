@@ -1,4 +1,4 @@
-import User from "../../models/User.js";
+import {User} from "../../models/User.js";
 
 export const makeUserRepository = () => {
     const create = async ({ name, email, passwordHash, userType }) => {

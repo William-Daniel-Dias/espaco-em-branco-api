@@ -9,9 +9,10 @@ export const createUserSchema = () => z.object({
         .max(255, { message: 'Email cannot exceed 255 characters' }),
     password: z.string()
         .min(6, { message: 'Password must be at least 6 characters long.' }),
-    userType: z.enum(['artist', 'supporter', 'public'], 
-       { errorMap: () => ({ message: 'Invalid user type. Must be artist, supporter, or public.' })
-    })
+    userType: z.enum(['artist', 'supporter', 'public'],
+        {
+            errorMap: () => ({ message: 'Invalid user type. Must be artist, supporter, or public.' })
+        })
 })
 
 export const loginUserSchema = () => (z.object({

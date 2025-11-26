@@ -2,15 +2,14 @@
 import { Router } from 'express'
 import { makeSpaceService } from '../modules/spaces/space.service.js'
 import { makeSpaceController } from '../modules/spaces/space.controller.js'
-import { spaceSchemas } from '../modules/spaces/space.schemas.js'
 import { ensureAuth } from '../middlewares/auth.js'
 import { validate } from '../middlewares/validate.js'
+import { createSpaceSchema, updateSpaceSchema } from '../modules/spaces/space.schemas.js'
 
 export const spaceRouter = () => {
     const router = Router()
 
-    const spaceService = makeSpaceService()
-    const spaceController = makeSpaceController({ spaceService })
+    const spaceController = makeSpaceController()
 
     // Public
     router.get('/', spaceController.getAll)
@@ -21,14 +20,14 @@ export const spaceRouter = () => {
     router.post(
         '/',
         ensureAuth,
-        validate({ body: spaceSchemas.createSpace }),
+        validate({ body: createSpaceSchema }),
         spaceController.create
     )
 
     router.put(
         '/:id',
         ensureAuth,
-        validate({ body: spaceSchemas.updateSpace }),
+        validate({ body: updateSpaceSchema }),
         spaceController.update
     )
 

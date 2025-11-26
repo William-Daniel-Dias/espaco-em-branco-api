@@ -19,6 +19,7 @@ export const createApp = () => {
     app.use("/auth", authRouter())
     app.use("/events", eventRouter())
     app.use("/spaces", spaceRouter())
+    app.use("/payments", spaceRouter())
 
     app.use(errorHandler);
     return app;

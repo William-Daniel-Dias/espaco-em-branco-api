@@ -62,28 +62,6 @@ export const Event = database.define('Event', {
             }
         }
     },
-    ticketValue: {
-        type: DataTypes.DECIMAL(10, 2),
-        allowNull: false,
-        field: 'ticket_value',
-        validate: {
-            min: {
-                args: [0],
-                msg: 'Ticket value cannot be negative.'
-            }
-        }
-    },
-    availableSpots: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        field: 'available_spots',
-        validate: {
-            min: {
-                args: [1],
-                msg: 'Available spots must be at least 1.'
-            }
-        }
-    },
     currentProgress: {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false,

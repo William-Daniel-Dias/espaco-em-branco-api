@@ -19,7 +19,7 @@ export const makeEventService = () => {
     status
   }) => {
     // Validate artist exists and is of type 'artist'
-    const artist = await userRepository.findById(artistId)
+    const artist = await userRepository.findById({id:artistId})
     
     if (!artist) {
       throw new HttpError('Artist not found.', 404, 'ARTIST_NOT_FOUND')

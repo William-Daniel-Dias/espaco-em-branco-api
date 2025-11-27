@@ -7,6 +7,7 @@ export const makeSpaceController = () => {
         try {
             const supporterId = req.user?.id
 
+
             const space = await spaceService.createSpace({
                 supporterId,
                 name: req.body.name,
@@ -47,7 +48,7 @@ export const makeSpaceController = () => {
         try {
             const { supporterId } = req.params
             const spaces = await spaceService.getSpacesBySupporter(Number(supporterId))
-            return res.status(200).json({ spaces })
+            return res.status(200).json(spaces)
         } catch (err) {
             next(err)
         }
@@ -55,8 +56,8 @@ export const makeSpaceController = () => {
 
     const getAll = async (req, res, next) => {
         try {
-            const spaces = await spaceService.getAllSpaces()
-            return res.status(200).json({ spaces })
+            const spaces = await spaceService.getAllSpace()
+            return res.status(200).json(spaces)
         } catch (err) {
             next(err)
         }

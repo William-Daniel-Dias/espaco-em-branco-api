@@ -6,10 +6,6 @@ export const paymentSchemas = {
       .string({ required_error: 'Event ID is required.' })
       .uuid({ message: 'Invalid event ID format.' }),
 
-    userId: z
-      .string({ required_error: 'User ID is required.' })
-      .uuid({ message: 'Invalid user ID format.' }),
-
     value: z
       .number({
         required_error: 'Payment value is required.',

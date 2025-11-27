@@ -2,7 +2,7 @@ import { Space } from "../../models/Space.js"
 
 export const makeSpaceRepository = () => {
     const create = async data => {
-        const space = await Space.creste(data)
+        const space = await Space.create(data)
         return space.toJSON()
     }
     

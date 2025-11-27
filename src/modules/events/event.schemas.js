@@ -3,16 +3,10 @@ import { z } from 'zod'
 
 export const eventSchemas = {
     createEvent: z.object({
-        artistId: z
-            .string({ required_error: 'Artist ID is required.' })
-            .uuid({ message: 'Invalid artist ID format.' }),
 
         spaceId: z
-            .number({
-                required_error: 'Space ID is required.',
-                invalid_type_error: 'Space ID must be a number.'
-            })
-            .int({ message: 'Space ID must be an integer.' }),
+            .string({ required_error: 'Space ID is required.' })
+            .uuid({ message: 'Invalid event ID format.' }),
 
         title: z
             .string({ required_error: 'Event title is required.' })
@@ -26,7 +20,6 @@ export const eventSchemas = {
 
         dateTime: z
             .string({ required_error: 'Event date and time is required.' })
-            .datetime({ message: 'Invalid date and time format.' })
             .refine(
                 date => new Date(date) > new Date(),
                 { message: 'Event date must be in the future.' }

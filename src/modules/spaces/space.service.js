@@ -7,7 +7,7 @@ export const makeSpaceService = () => {
     const userRepository = makeUserRepository()
 
     const createSpace = async ({ supporterId, name, address, capacity, photoUrl, description }) => {
-        const supporter = await userRepository.findById(supporterId)
+        const supporter = await userRepository.findById({id:supporterId})
 
         if (!supporter) {
             throw new HttpError('Supporter not found.', 404, 'SUPPORTER_NOT_FOUND')

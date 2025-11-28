@@ -4,7 +4,11 @@
   "main": "index.js",
   "scripts": {
     "dev": "node --watch src/server.js",
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "db:seed:users": "sequelize db:seed --seed 20251128003115-demo-users.cjs",
+    "db:seed:spaces": "sequelize db:seed --seed 20251128003119-demo-spaces.cjs",
+    "db:seed:events": "sequelize db:seed --seed 20251128003123-demo-events.cjs",
+    "db:seed:payments": "sequelize db:seed --seed 20251128003126-demo-payments.cjs"
   },
   "repository": "https://github.com/William-Daniel-Dias/espaco-em-branco-api.git",
   "author": "William Daniel Dias <daniel.willia@hotmail.com>",

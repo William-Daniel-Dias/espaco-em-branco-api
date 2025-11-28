@@ -3,17 +3,19 @@ import { database } from '../config/database.js';
 
 export const Event = database.define('Event', {
     id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
-        autoIncrement: true
+        allowNull: false,
+        unique: true
     },
     artistId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         allowNull: false,
         field: 'artist_id',
     },
     spaceId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         allowNull: false,
         field: 'space_id',
     },

@@ -69,7 +69,6 @@ Payment.belongsTo(Event, {
 
 // Exporta todos os modelos e o objeto sequelize
 const models = {
-    database,
     User,
     Space,
     Event,

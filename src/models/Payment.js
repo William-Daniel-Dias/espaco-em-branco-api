@@ -3,17 +3,19 @@ import { database } from '../config/database.js';
 
 export const Payment = database.define('Payment', {
     id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
-        autoIncrement: true
+        allowNull: false,
+        unique: true
     },
     eventId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         allowNull: false,
         field: 'event_id',
     },
     userId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         allowNull: false,
         field: 'user_id',
     },

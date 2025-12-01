@@ -1,4 +1,6 @@
 import { Event } from '../../models/Event.js'
+import { Space } from '../../models/Space.js'
+import { User } from '../../models/User.js'
 
 export const makeEventRepository = () => {
     const create = async data => {
@@ -7,17 +9,17 @@ export const makeEventRepository = () => {
     }
 
     const findById = async id => {
-        const event = await Event.findByPk(id)
+        const event = await Event.findByPk(id, { include: [{ model: Space, as: 'space', foreignKey: 'space' }, {model: User, as: 'artist', foreignKey: 'artist'}] })
         return event ? event.toJSON() : null
     }
 
     const findByArtistId = async artistId => {
-        const events = await Event.findAll({ where: { artistId } })
+        const events = await Event.findAll({ where: { artistId }, include: [{ model: Space, as: 'space', foreignKey: 'space' }, {model: User, as: 'artist', foreignKey: 'artist'}] },)
         return events.map(e => e.toJSON())
     }
 
     const findBySpaceId = async spaceId => {
-        const events = await Event.findAll({ where: { spaceId } })
+        const events = await Event.findAll({ where: { spaceId }, include: [{ model: Space, as: 'space', foreignKey: 'space' }, {model: User, as: 'artist', foreignKey: 'artist'}] })
         return events.map(e => e.toJSON())
     }
 
@@ -25,7 +27,7 @@ export const makeEventRepository = () => {
         const where = {}
         if (filters.status) where.status = filters.status
 
-        const events = await Event.findAll({ where })
+        const events = await Event.findAll({ where, include: [{ model: Space, as: 'space', foreignKey: 'space' }, {model: User, as: 'artist', foreignKey: 'artist'}] })
         return events.map(e => e.toJSON())
     }
 
@@ -37,7 +39,7 @@ export const makeEventRepository = () => {
 
         if (!affected) return null
 
-        const updated = await Event.findByPk(id)
+        const updated = await Event.findByPk(id, { include: [{ model: Space, as: 'space', foreignKey: 'space' }, {model: User, as: 'artist', foreignKey: 'artist'}] })
         return updated ? updated.toJSON() : null
     }
 

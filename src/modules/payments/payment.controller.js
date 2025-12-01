@@ -5,7 +5,7 @@ export const makePaymentController = () => {
 
     const create = async (req, res, next) => {
         try {
-            const userId = req.body.userId ?? req.user?.id
+            const userId = req.user.id
 
             const result = await paymentService.createPayment({
                 eventId: req.body.eventId,

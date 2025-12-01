@@ -20,7 +20,7 @@ export const makePaymentService = () => {
         }
 
         // Validate user exists
-        const user = await userRepository.findById(userId)
+        const user = await userRepository.findById({id:userId})
         if (!user) {
             throw new HttpError('User not found.', 404, 'USER_NOT_FOUND')
         }

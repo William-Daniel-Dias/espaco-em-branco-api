@@ -39,7 +39,7 @@ export const makeEventController = () => {
                 })
             }
 
-            return response.status(200).json({ event })
+            return response.json(event)
         } catch (err) {
             next(err)
         }
@@ -47,9 +47,10 @@ export const makeEventController = () => {
 
     const getByArtist = async (request, response, next) => {
         try {
-            const { artistId } = request.params
-            const events = await eventService.getEventsByArtist(artistId)
-            return response.status(200).json({ events })
+            const { id } = request.user
+            
+            const events = await eventService.getEventsByArtist(id)
+            return response.json(events)
         } catch (err) {
             next(err)
         }
@@ -59,7 +60,7 @@ export const makeEventController = () => {
         try {
             const { spaceId } = request.params
             const events = await eventService.getEventsBySpace(Number(spaceId))
-            return response.status(200).json({ events })
+            return response.json(events)
         } catch (err) {
             next(err)
         }
@@ -69,7 +70,7 @@ export const makeEventController = () => {
         try {
             const { status } = request.query
             const events = await eventService.getAllEvents({ status })
-            return response.status(200).json({ events })
+            return response.json(events)
         } catch (err) {
             next(err)
         }
@@ -86,7 +87,7 @@ export const makeEventController = () => {
                 data: request.body
             })
 
-            return response.status(200).json({
+            return response.json({
                 message: 'Event updated successfully.',
                 event: updated
             })

@@ -4,7 +4,7 @@ import { ensureAuth } from '../middlewares/auth.js'
 import { paymentSchemas } from '../modules/payments/payment.schemas.js'
 import { validate } from '../middlewares/validate.js'
 
-export const makePaymentRoutes = () => {
+export const paymentRouter = () => {
     const router = Router()
 
     const paymentController = makePaymentController()

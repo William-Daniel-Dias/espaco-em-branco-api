@@ -7,6 +7,7 @@ import { errorHandler } from './middlewares/errorHandler.js';
 import { authRouter } from './routes/auth.routes.js';
 import { eventRouter } from './routes/event.routes.js';
 import { spaceRouter } from './routes/space.routes.js';
+import { paymentRouter } from './routes/payment.routes.js';
 
 export const createApp = () => {
     const app = express();
@@ -19,7 +20,7 @@ export const createApp = () => {
     app.use("/auth", authRouter())
     app.use("/events", eventRouter())
     app.use("/spaces", spaceRouter())
-    app.use("/payments", spaceRouter())
+    app.use("/payments", paymentRouter())
 
     app.use(errorHandler);
     return app;
